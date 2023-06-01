@@ -44,6 +44,58 @@ app.post('/detail', (req, res) => {
     res.render("detail.ejs",{users:req.body})
 })
 
+//블로그 리스트에 뿌려줄 데이터들 준비 (추후에는 데이터베이스에서 세팅)
+const blogData = [{
+        no:1,
+        title:"블로그 제목1",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.1",
+        author:"관리자"
+    },
+    {
+        no:2,
+        title:"블로그 제목2",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.2",
+        author:"관리자"
+    },
+    {
+        no:3,
+        title:"블로그 제목3",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.3",
+        author:"관리자"
+    },
+    {
+        no:4,
+        title:"블로그 제목1",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.4",
+        author:"관리자"
+    },
+    {
+        no:5,
+        title:"블로그 제목1",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.5",
+        author:"관리자"
+    },
+    {
+        no:6,
+        title:"블로그 제목1",
+        context:"해당 블로그 글 내용은 이러쿵 저러쿵 입니다.6",
+        author:"관리자"
+    }]
+
+//블로그 리스트 페이지로
+app.get('/bloglist', (req, res) => {
+    res.render("blogList.ejs",{test:blogData})
+})
+
+//블로그 리스트에서 해당하는 목록 하나를 눌렀을 때 해당 상세페이지 화면으로 이동
+//url parameter 웹브라우저 주소창에 데이터 실어서 보내주는 작업
+app.get('/blogdetail/:no',(req,res)=>{
+    //a태그에 주소에 포함되어 있는 데이터값을 출력할 때 사용   /blogdetail/5 <--- 데이터값
+    // console.log(req.params.no)
+    res.render("blogDetail.ejs",{data:blogData[req.params.no]})
+})
+
+
 
 //서버가 시작이 됬을 때 사용되는 코드
 app.listen(port, () => {
